@@ -43,8 +43,16 @@ fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
 fn main() {
     // Set legal age to 16
     const LEGAL_AGE: i32 = 16;
+    let mut input_age: i32;
     // prompt for input_age "What is your age? "
-    let input_age: i32 = get_input("What is your age? ");
+    loop {
+        input_age = get_input("What is your age? ");
+        if input_age < 0 {
+            println!("Invalid input. Please try again");
+        } else {
+            break;
+        }
+    }
     // Check if age is legal
         // if legal, print "You are old enough to legally drive."
         // if not, print  "You are not old enough to legally drive."
