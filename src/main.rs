@@ -6,8 +6,8 @@ use std::io::Write;
 // Process: checks if legal age
 // Outputs: "You are old enough to legally drive." or "You are not old enough to legally drive."
 
-fn can_drive_legally(age: i32) -> bool {
-    age >= 16
+fn can_drive_legally(age: i32, legal_age: i32) -> bool {
+    age >= legal_age
 }
 
 #[cfg(test)]
@@ -16,12 +16,12 @@ mod tests {
 
     #[test]
     fn test_can_drive_legally() {
-        assert_eq!(can_drive_legally(1), false);
-        assert_eq!(can_drive_legally(15), false);
-        assert_eq!(can_drive_legally(16), true);
-        assert_eq!(can_drive_legally(30), true);
-        assert_eq!(can_drive_legally(0), false);
-        assert_eq!(can_drive_legally(3252340), true);
+        assert_eq!(can_drive_legally(1, 16), false);
+        assert_eq!(can_drive_legally(15, 16), false);
+        assert_eq!(can_drive_legally(16, 16), true);
+        assert_eq!(can_drive_legally(30, 16), true);
+        assert_eq!(can_drive_legally(0, 16), false);
+        assert_eq!(can_drive_legally(3252340, 16), true);
     }
 }
 
@@ -42,9 +42,15 @@ fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
 
 fn main() {
     // Set legal age to 16
+    const LEGAL_AGE: i32 = 16;
     // prompt for input_age "What is your age? "
+    let input_age: i32 = get_input("What is your age? ");
     // Check if age is legal
         // if legal, print "You are old enough to legally drive."
         // if not, print  "You are not old enough to legally drive."
-    
+    if can_drive_legally(input_age, LEGAL_AGE) {
+        println!("You are old enough to legally drive.");
+    } else {
+        println!("You are not old enough to legally drive.");
+    }
 }
