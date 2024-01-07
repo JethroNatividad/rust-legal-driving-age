@@ -1,3 +1,6 @@
+use std::io;
+use std::io::Write;
+
 // program that prompts for age, and checks if it is under or over the legal age.
 // Inputs: age
 // Process: checks if legal age
@@ -22,6 +25,20 @@ mod tests {
     }
 }
 
+fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
+    loop {
+        print!("{}", prompt);
+        io::stdout().flush().unwrap();
+
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).expect("Failed to read input");
+
+        match input.trim().parse() {
+            Ok(value) => break value,
+            Err(_) => println!("Invalid input. Please try again."),
+        }
+    }
+}
 
 fn main() {
     println!("Hello, world!");
