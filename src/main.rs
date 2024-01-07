@@ -4,7 +4,7 @@
 // Outputs: “You are old enough to legally drive.” or “You are not old enough to legally drive.”
 
 fn can_drive(age: i32) -> bool {
-
+    age >= 16
 }
 
 #[cfg(test)]
