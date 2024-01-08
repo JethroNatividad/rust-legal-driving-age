@@ -6,7 +6,7 @@ use std::io::Write;
 // Process: checks if legal age
 // Outputs: "You are old enough to legally drive." or "You are not old enough to legally drive."
 
-fn can_drive_legally(age: i32, legal_age: i32) -> bool {
+fn can_drive_legally(age: u32, legal_age: u32) -> bool {
     age >= legal_age
 }
 
@@ -42,17 +42,9 @@ fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
 
 fn main() {
     // Set legal age to 16
-    const LEGAL_AGE: i32 = 16;
-    let mut input_age: i32;
+    const LEGAL_AGE: u32 = 16;
     // prompt for input_age "What is your age? "
-    loop {
-        input_age = get_input("What is your age? ");
-        if input_age < 0 {
-            println!("Invalid input. Please try again");
-        } else {
-            break;
-        }
-    }
+    let input_age: u32 = get_input("What is your age? ");
     // Check if age is legal
         // if legal, print "You are old enough to legally drive."
         // if not, print  "You are not old enough to legally drive."
